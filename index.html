@@ -1,0 +1,1039 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>
+    (function () {
+        let hash = location.hash;
+
+        if (hash.includes('?')) {
+            hash = hash.substring(0, hash.indexOf('?'));
+        }
+
+        const cleanUrl =
+            location.origin +
+            location.pathname +
+            hash;
+
+        if (location.href !== cleanUrl) {
+            history.replaceState(null, '', cleanUrl);
+        }
+    })();
+  </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Interstellar Dragon Enterprise provides information technology services, digital marketing, online platform management, and services related to digital games and mobile applications in Malaysia." />
+  <title>Interstellar Dragon Enterprise | Digital Technology Services</title>
+
+  <link rel="canonical" href="https://www.istdragon.com/" />
+  <meta property="og:url" content="https://www.istdragon.com/" />
+
+  <style>
+    :root {
+      --bg: #020617;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-strong: rgba(15, 23, 42, 0.78);
+      --line: rgba(255, 255, 255, 0.12);
+      --text: #ffffff;
+      --muted: #cbd5e1;
+      --soft: #94a3b8;
+      --cyan: #67e8f9;
+      --cyan-strong: #22d3ee;
+      --pink: #f0abfc;
+      --dark: #0f172a;
+      --radius: 28px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .page-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .glow {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(70px);
+      opacity: 0.36;
+    }
+
+    .glow-one {
+      top: -160px;
+      left: 50%;
+      width: 560px;
+      height: 560px;
+      transform: translateX(-50%);
+      background: #06b6d4;
+    }
+
+    .glow-two {
+      right: -140px;
+      bottom: -160px;
+      width: 460px;
+      height: 460px;
+      background: #d946ef;
+    }
+
+    .glow-three {
+      left: -160px;
+      top: 380px;
+      width: 380px;
+      height: 380px;
+      background: #6366f1;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--line);
+      background: rgba(2, 6, 23, 0.76);
+      backdrop-filter: blur(18px);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: max-content;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 17px;
+      background: linear-gradient(135deg, var(--cyan), var(--pink));
+      color: var(--dark);
+      font-weight: 900;
+      box-shadow: 0 12px 34px rgba(103, 232, 249, 0.18);
+    }
+
+    .brand-kicker {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #a5f3fc;
+    }
+
+    .brand-name {
+      margin: -3px 0 0;
+      font-size: 18px;
+      line-height: 1.15;
+      font-weight: 900;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: #dbeafe;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .desktop-nav a {
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .desktop-nav a:hover {
+      color: #ffffff;
+    }
+
+    .header-cta,
+    .primary-btn,
+    .secondary-btn,
+    .submit-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, border 0.2s ease;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .header-cta {
+      padding: 10px 18px;
+      background: #ffffff;
+      color: var(--dark);
+      font-size: 14px;
+    }
+
+    .header-cta:hover,
+    .primary-btn:hover,
+    .submit-btn:hover {
+      transform: translateY(-1px);
+      background: #cffafe;
+    }
+
+    .mobile-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: transparent;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      display: none;
+      border-top: 1px solid var(--line);
+      padding: 12px 0 18px;
+    }
+
+    .mobile-menu a {
+      display: block;
+      border-radius: 14px;
+      padding: 10px 12px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .mobile-menu a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.06fr 0.94fr;
+      align-items: center;
+      gap: 54px;
+      min-height: 760px;
+      padding: 88px 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 100%;
+      margin-bottom: 24px;
+      border: 1px solid rgba(103, 232, 249, 0.28);
+      border-radius: 999px;
+      padding: 9px 14px;
+      background: rgba(103, 232, 249, 0.09);
+      color: #cffafe;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 24px;
+      max-width: 820px;
+      font-size: clamp(44px, 7vw, 78px);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+      font-weight: 950;
+    }
+
+    .hero-text {
+      max-width: 680px;
+      margin-bottom: 34px;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.8;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .primary-btn,
+    .secondary-btn,
+    .submit-btn {
+      padding: 13px 22px;
+      font-size: 15px;
+    }
+
+    .primary-btn,
+    .submit-btn {
+      background: var(--cyan);
+      color: var(--dark);
+      box-shadow: 0 18px 40px rgba(34, 211, 238, 0.16);
+    }
+
+    .secondary-btn {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: #ffffff;
+    }
+
+    .secondary-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-card-wrap {
+      position: relative;
+    }
+
+    .hero-card-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -18px;
+      z-index: -1;
+      border-radius: 42px;
+      background: linear-gradient(135deg, rgba(103, 232, 249, 0.22), rgba(240, 171, 252, 0.16), rgba(99, 102, 241, 0.24));
+      filter: blur(18px);
+    }
+
+    .hero-card {
+      border: 1px solid var(--line);
+      border-radius: 40px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      padding: 24px;
+    }
+
+    .hero-card-inner {
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: var(--panel-strong);
+      padding: 26px;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--soft);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .big-icon {
+      display: grid;
+      place-items: center;
+      min-width: 56px;
+      width: 56px;
+      height: 56px;
+      border-radius: 20px;
+      background: #ffffff;
+      color: var(--dark);
+      font-size: 26px;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .mini-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.045);
+      padding: 16px;
+    }
+
+    .mini-icon {
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      border-radius: 15px;
+      background: rgba(103, 232, 249, 0.12);
+      color: #a5f3fc;
+      font-size: 20px;
+    }
+
+    .mini-item h3 {
+      margin-bottom: 4px;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .mini-item p {
+      margin: 0;
+      color: var(--soft);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .stats-strip {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      padding: 28px 0;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 20px;
+    }
+
+    .stat strong {
+      display: block;
+      color: #a5f3fc;
+      font-size: 25px;
+      line-height: 1.2;
+      font-weight: 950;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 5px;
+      color: var(--soft);
+      font-size: 14px;
+    }
+
+    .section {
+      padding: 96px 0;
+    }
+
+    .section-kicker {
+      margin-bottom: 14px;
+      color: #a5f3fc;
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+
+    .section h2 {
+      max-width: 760px;
+      margin-bottom: 18px;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      font-weight: 950;
+    }
+
+    .section-intro {
+      max-width: 790px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 46px;
+    }
+
+    .service-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.055);
+      padding: 30px;
+      box-shadow: 0 18px 54px rgba(0, 0, 0, 0.12);
+      transition: transform 0.22s ease, background 0.22s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .service-icon {
+      display: grid;
+      place-items: center;
+      width: 58px;
+      height: 58px;
+      margin-bottom: 24px;
+      border-radius: 21px;
+      background: linear-gradient(135deg, var(--cyan), var(--pink));
+      color: var(--dark);
+      font-size: 26px;
+      font-weight: 900;
+    }
+
+    .service-card h3 {
+      margin-bottom: 12px;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    .service-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .about {
+      background: #ffffff;
+      color: var(--dark);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .about .section-kicker {
+      color: #64748b;
+    }
+
+    .about h2 {
+      margin: 0;
+      color: #020617;
+    }
+
+    .about-copy {
+      color: #475569;
+      font-size: 18px;
+      line-height: 1.85;
+    }
+
+    .scope-card {
+      margin-top: 28px;
+      border-radius: 30px;
+      background: #020617;
+      color: #ffffff;
+      padding: 28px;
+    }
+
+    .scope-card .section-kicker {
+      color: #a5f3fc;
+      margin-bottom: 12px;
+    }
+
+    .scope-card p {
+      margin: 0;
+      color: #cbd5e1;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.92fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .contact-card {
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 30px;
+      backdrop-filter: blur(18px);
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 24px;
+    }
+
+    .contact-icon {
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 48px;
+      height: 48px;
+      border-radius: 18px;
+      background: rgba(103, 232, 249, 0.12);
+      color: #a5f3fc;
+      font-size: 21px;
+    }
+
+    .contact-item h3 {
+      margin: 0 0 4px;
+      font-size: 16px;
+    }
+
+    .contact-item p,
+    .contact-item a {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .contact-item a:hover {
+      color: #a5f3fc;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 13px;
+      margin-top: 28px;
+    }
+
+    .field {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      outline: none;
+      background: rgba(2, 6, 23, 0.72);
+      color: #ffffff;
+      padding: 14px 15px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .field:focus {
+      border-color: rgba(103, 232, 249, 0.65);
+      box-shadow: 0 0 0 4px rgba(103, 232, 249, 0.12);
+    }
+
+    textarea.field {
+      min-height: 128px;
+      resize: vertical;
+    }
+
+    .form-note {
+      margin: 0;
+      color: #64748b;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0;
+      color: var(--soft);
+      font-size: 14px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.62s ease, transform 0.62s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 920px) {
+      .desktop-nav,
+      .header-cta {
+        display: none;
+      }
+
+      .mobile-toggle {
+        display: inline-grid;
+        place-items: center;
+      }
+
+      .mobile-menu.open {
+        display: block;
+      }
+
+      .hero,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 72px 0;
+      }
+
+      .service-grid,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 28px, 1160px);
+      }
+
+      .brand-name {
+        font-size: 16px;
+      }
+
+      .brand-kicker {
+        font-size: 10px;
+      }
+
+      .pill {
+        align-items: flex-start;
+        border-radius: 18px;
+      }
+
+      .button-row {
+        display: grid;
+      }
+
+      .primary-btn,
+      .secondary-btn {
+        width: 100%;
+      }
+
+      .hero-card,
+      .hero-card-inner,
+      .service-card,
+      .contact-card {
+        border-radius: 24px;
+        padding: 20px;
+      }
+
+      .card-top {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true">
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+    <div class="glow glow-three"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="Interstellar Dragon Enterprise home">
+        <span class="brand-mark">✦</span>
+        <span>
+          <span class="brand-kicker">Interstellar</span>
+          <span class="brand-name">Dragon Enterprise</span>
+        </span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a class="header-cta" href="mailto:kalidasthambirajah@gmail.com?subject=Business%20Enquiry%20-%20Interstellar%20Dragon%20Enterprise">Get in touch</a>
+
+      <button class="mobile-toggle" id="mobileToggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+
+    <div class="container mobile-menu" id="mobileMenu">
+      <a href="/">Home</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero" id="home">
+      <div class="reveal">
+        <div class="pill">✓ Registered Malaysian business · SSM No. 202603118553 (JM1043861-K)</div>
+        <h1>Digital technology services for the next wave of online growth.</h1>
+        <p class="hero-text">
+          Interstellar Dragon Enterprise provides information technology services, digital marketing,
+          online platform management, and services related to digital games and mobile applications.
+        </p>
+        <div class="button-row">
+          <a class="primary-btn" href="#services">Explore services →</a>
+          <a class="secondary-btn" href="#contact">Contact us</a>
+        </div>
+      </div>
+
+      <div class="hero-card-wrap reveal">
+        <div class="hero-card">
+          <div class="hero-card-inner">
+            <div class="card-top">
+              <div>
+                <p class="eyebrow">Core focus</p>
+                <p class="card-title">Technology · Marketing · Games</p>
+              </div>
+              <div class="big-icon" aria-hidden="true">🎮</div>
+            </div>
+
+            <div class="mini-list">
+              <article class="mini-item">
+                <div class="mini-icon" aria-hidden="true">💻</div>
+                <div>
+                  <h3>Information Technology Services</h3>
+                  <p>Practical IT solutions for modern businesses, including web, platform, and application support.</p>
+                </div>
+              </article>
+              <article class="mini-item">
+                <div class="mini-icon" aria-hidden="true">📈</div>
+                <div>
+                  <h3>Digital Marketing</h3>
+                  <p>Online growth strategy, campaign execution, creative content, and audience acquisition.</p>
+                </div>
+              </article>
+              <article class="mini-item">
+                <div class="mini-icon" aria-hidden="true">🌐</div>
+                <div>
+                  <h3>Online Platform Management</h3>
+                  <p>Operational support for digital platforms, user journeys, campaign pages, and online workflows.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-strip" aria-label="Company facts">
+      <div class="container stats">
+        <div class="stat">
+          <strong>2026</strong>
+          <span>Business registration year</span>
+        </div>
+        <div class="stat">
+          <strong>JM1043861-K</strong>
+          <span>SSM registration reference</span>
+        </div>
+        <div class="stat">
+          <strong>Kuantan</strong>
+          <span>Based in Pahang, Malaysia</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section" id="services">
+      <div class="reveal">
+        <p class="section-kicker">Services</p>
+        <h2>Built for online business operations.</h2>
+        <p class="section-intro">
+          We support companies and creators across IT services, marketing execution, online platform operations,
+          and digital gaming or mobile application related services.
+        </p>
+      </div>
+
+      <div class="service-grid">
+        <article class="service-card reveal">
+          <div class="service-icon" aria-hidden="true">💻</div>
+          <h3>Information Technology Services</h3>
+          <p>Practical IT support, digital service setup, website operations, platform workflows, and application-related assistance.</p>
+        </article>
+        <article class="service-card reveal">
+          <div class="service-icon" aria-hidden="true">📣</div>
+          <h3>Digital Marketing</h3>
+          <p>Campaign planning, content direction, advertising support, conversion-focused landing pages, and online growth execution.</p>
+        </article>
+        <article class="service-card reveal">
+          <div class="service-icon" aria-hidden="true">🌐</div>
+          <h3>Online Platform Management</h3>
+          <p>Support for digital platforms, account operations, product pages, campaign pages, analytics, and user experience improvements.</p>
+        </article>
+        <article class="service-card reveal">
+          <div class="service-icon" aria-hidden="true">🎮</div>
+          <h3>Digital Games & Mobile Apps</h3>
+          <p>Services related to digital games and mobile applications, including app operations, publishing support, and online promotion.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="about section" id="about">
+      <div class="container about-grid">
+        <div class="reveal">
+          <p class="section-kicker">About</p>
+          <h2>A technology and digital services enterprise in Kuantan.</h2>
+        </div>
+        <div class="about-copy reveal">
+          <p>
+            Interstellar Dragon Enterprise is registered as a sole proprietorship in Malaysia. The business is active
+            and registered under the Registration of Businesses Act 1956, with its principal place of business in
+            Bandar Indera Mahkota, Kuantan, Pahang.
+          </p>
+          <div class="scope-card">
+            <p class="section-kicker">Business scope</p>
+            <p>
+              Information technology services, digital marketing, online platform management, and services related
+              to digital games and mobile applications.
+            </p>
+          </div>
+          <div class="scope-card" style="margin-top:20px;">
+            <p class="section-kicker">Featured Game</p>
+            <p>
+              <a
+                href="https://istdragon.com/MomentsPuzzle/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="color:#67e8f9;font-weight:700;text-decoration:none;"
+              >
+                MomentsPuzzle
+              </a>
+              <br>
+              A puzzle game project published by Interstellar Dragon Enterprise, showcasing our experience in game development, mobile applications, and digital product operations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section" id="contact">
+      <div class="contact-grid">
+        <div class="reveal">
+          <p class="section-kicker">Contact</p>
+          <h2>Start a digital project with us.</h2>
+          <p class="section-intro">
+            Tell us about your platform, campaign, application, or game-related service needs.
+            We will respond with a practical path forward.
+          </p>
+        </div>
+
+        <aside class="contact-card reveal" aria-label="Contact information">
+          <div class="contact-item">
+            <div class="contact-icon" aria-hidden="true">📍</div>
+            <div>
+              <h3>Principal Business Address</h3>
+              <p>B8, Ground Floor, Jalan IM 7/5, Bandar Indera Mahkota, 25200 Kuantan, Pahang, Malaysia</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon" aria-hidden="true">✉</div>
+            <div>
+              <h3>Email</h3>
+              <a href="mailto:kalidasthambirajah@gmail.com">kalidasthambirajah@gmail.com</a>
+            </div>
+          </div>
+
+          <form class="contact-form" action="mailto:kalidasthambirajah@gmail.com" method="post" enctype="text/plain">
+            <input class="field" name="Name" type="text" placeholder="Your name" required />
+            <input class="field" name="Email" type="email" placeholder="Email address" required />
+            <textarea class="field" name="Message" placeholder="Tell us about your project" required></textarea>
+            <button class="submit-btn" type="submit">Send enquiry</button>
+            <p class="form-note">
+              This static form opens the visitor's email app. For production use, connect the form to your hosting provider,
+              CRM, or backend service.
+            </p>
+          </form>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Interstellar Dragon Enterprise. All rights reserved.</span>
+      <span>SSM No. 202603118553 (JM1043861-K)</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    var mobileToggle = document.getElementById('mobileToggle');
+    var mobileMenu = document.getElementById('mobileMenu');
+
+    mobileToggle.addEventListener('click', function () {
+      var isOpen = mobileMenu.classList.toggle('open');
+      mobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      mobileToggle.textContent = isOpen ? '×' : '☰';
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        mobileMenu.classList.remove('open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        mobileToggle.textContent = '☰';
+      });
+    });
+
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(function (element) {
+      observer.observe(element);
+    });
+  </script>
+</body>
+</html>
